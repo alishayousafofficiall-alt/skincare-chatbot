@@ -1,6 +1,6 @@
 // api/chat.js
 // Ye Vercel serverless function hai. Ye tumhari website (InfinityFree) se
-// message leta hai, Gemini API ko bhejta hai, aur jawab wapis karta hai.
+// message leta hai, Groq API ko bhejta hai, aur jawab wapis karta hai.
 
 const KNOWLEDGE_BASE = `
 Tum ek helpful skincare store ki customer support assistant ho. Naam: "Glow Assistant".
@@ -144,24 +144,14 @@ do ke wo product store mein available nahi hai, aur milte julte products suggest
 
 ### Neutrogena
 - Acne Wash (Neutrogena) - Rs. 1100 - Neutrogena skincare product
-- Acne Wash (Neutrogena) - Rs. 1100 - Neutrogena skincare product
-- Bright Boost Serum (Neutrogena) - Rs. 1100 - Neutrogena skincare product
 - Bright Boost Serum (Neutrogena) - Rs. 1100 - Neutrogena skincare product
 - Deep Clean Facewash (Neutrogena) - Rs. 1100 - Neutrogena skincare product
-- Deep Clean Facewash (Neutrogena) - Rs. 1100 - Neutrogena skincare product
-- Hydrating Toner (Neutrogena) - Rs. 1100 - Neutrogena skincare product
 - Hydrating Toner (Neutrogena) - Rs. 1100 - Neutrogena skincare product
 - Hydro Boost Cleanser (Neutrogena) - Rs. 1100 - Neutrogena skincare product
-- Hydro Boost Cleanser (Neutrogena) - Rs. 1100 - Neutrogena skincare product
-- Hydro Boost Cream (Neutrogena) - Rs. 1100 - Neutrogena skincare product
 - Hydro Boost Cream (Neutrogena) - Rs. 1100 - Neutrogena skincare product
 - Hydro Boost Gel (Neutrogena) - Rs. 1100 - Neutrogena skincare product
-- Hydro Boost Gel (Neutrogena) - Rs. 1100 - Neutrogena skincare product
-- Makeup Remover (Neutrogena) - Rs. 1100 - Neutrogena skincare product
 - Makeup Remover (Neutrogena) - Rs. 1100 - Neutrogena skincare product
 - Oil Free Moisturizer (Neutrogena) - Rs. 1100 - Neutrogena skincare product
-- Oil Free Moisturizer (Neutrogena) - Rs. 1100 - Neutrogena skincare product
-- Ultra Sheer Sunscreen (Neutrogena) - Rs. 1100 - Neutrogena skincare product
 - Ultra Sheer Sunscreen (Neutrogena) - Rs. 1100 - Neutrogena skincare product
 
 ### Clinique
@@ -236,38 +226,28 @@ do ke wo product store mein available nahi hai, aur milte julte products suggest
 - Innisfree Sunscreen (Innisfree) - Rs. 1400 - Innisfree skincare product
 - Innisfree Toner (Innisfree) - Rs. 1400 - Innisfree skincare product
 
-### L\'Oréal Paris
-- Loreal Day Cream (L\'Oréal Paris) - Rs. 1300 - Loreal skincare product
-- Loreal Face Cream (L\'Oréal Paris) - Rs. 1300 - Loreal skincare product
-- Loreal Face Mask (L\'Oréal Paris) - Rs. 1300 - Loreal skincare product
-- Loreal Face Wash (L\'Oréal Paris) - Rs. 1300 - Loreal skincare product
-- Loreal Moisturizer (L\'Oréal Paris) - Rs. 1300 - Loreal skincare product
-- Loreal Night Cream (L\'Oréal Paris) - Rs. 1300 - Loreal skincare product
-- Loreal Serum (L\'Oréal Paris) - Rs. 1300 - Loreal skincare product
-- Loreal Sunscreen (L\'Oréal Paris) - Rs. 1300 - Loreal skincare product
-- Loreal Toner (L\'Oréal Paris) - Rs. 1300 - Loreal skincare product
-- Loreal Vitamin C Serum (L\'Oréal Paris) - Rs. 1300 - Loreal skincare product
+### L'Oréal Paris
+- Loreal Day Cream (L'Oréal Paris) - Rs. 1300 - Loreal skincare product
+- Loreal Face Cream (L'Oréal Paris) - Rs. 1300 - Loreal skincare product
+- Loreal Face Mask (L'Oréal Paris) - Rs. 1300 - Loreal skincare product
+- Loreal Face Wash (L'Oréal Paris) - Rs. 1300 - Loreal skincare product
+- Loreal Moisturizer (L'Oréal Paris) - Rs. 1300 - Loreal skincare product
+- Loreal Night Cream (L'Oréal Paris) - Rs. 1300 - Loreal skincare product
+- Loreal Serum (L'Oréal Paris) - Rs. 1300 - Loreal skincare product
+- Loreal Sunscreen (L'Oréal Paris) - Rs. 1300 - Loreal skincare product
+- Loreal Toner (L'Oréal Paris) - Rs. 1300 - Loreal skincare product
+- Loreal Vitamin C Serum (L'Oréal Paris) - Rs. 1300 - Loreal skincare product
 
 ### Nivea
 - Nivea Body Cream (Nivea) - Rs. 900 - Nivea skincare product
-- Nivea Body Cream (Nivea) - Rs. 900 - Nivea skincare product
-- Nivea Body Lotion (Nivea) - Rs. 900 - Nivea skincare product
 - Nivea Body Lotion (Nivea) - Rs. 900 - Nivea skincare product
 - Nivea Cream (Nivea) - Rs. 900 - Nivea skincare product
-- Nivea Cream (Nivea) - Rs. 900 - Nivea skincare product
-- Nivea Face Wash (Nivea) - Rs. 900 - Nivea skincare product
 - Nivea Face Wash (Nivea) - Rs. 900 - Nivea skincare product
 - Nivea Hydrating Cream (Nivea) - Rs. 900 - Nivea skincare product
-- Nivea Hydrating Cream (Nivea) - Rs. 900 - Nivea skincare product
-- Nivea Men Face Wash (Nivea) - Rs. 900 - Nivea skincare product
 - Nivea Men Face Wash (Nivea) - Rs. 900 - Nivea skincare product
 - Nivea Moisturizer (Nivea) - Rs. 900 - Nivea skincare product
-- Nivea Moisturizer (Nivea) - Rs. 900 - Nivea skincare product
-- Nivea Night Cream (Nivea) - Rs. 900 - Nivea skincare product
 - Nivea Night Cream (Nivea) - Rs. 900 - Nivea skincare product
 - Nivea Soft Cream (Nivea) - Rs. 900 - Nivea skincare product
-- Nivea Soft Cream (Nivea) - Rs. 900 - Nivea skincare product
-- Nivea Sunscreen (Nivea) - Rs. 900 - Nivea skincare product
 - Nivea Sunscreen (Nivea) - Rs. 900 - Nivea skincare product
 
 === FREQUENTLY ASKED QUESTIONS ===
@@ -341,21 +321,23 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Message zaroori hai' });
     }
 
-    const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+    const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
+      'https://api.groq.com/openai/v1/chat/completions',
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${GROQ_API_KEY}`
+        },
         body: JSON.stringify({
-          contents: [
-            {
-              parts: [
-                { text: `${KNOWLEDGE_BASE}\n\nCustomer ka sawal: ${message}` }
-              ]
-            }
-          ]
+          model: 'llama-3.3-70b-versatile',
+          messages: [
+            { role: 'system', content: KNOWLEDGE_BASE },
+            { role: 'user', content: message }
+          ],
+          temperature: 0.7
         })
       }
     );
@@ -363,11 +345,11 @@ export default async function handler(req, res) {
     const data = await response.json();
 
     if (!response.ok) {
-      console.error('Gemini API error:', data);
+      console.error('Groq API error:', data);
       return res.status(500).json({ error: 'AI se jawab lene mein masla hua' });
     }
 
-    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text
+    const reply = data?.choices?.[0]?.message?.content
       || 'Maazrat, mujhe abhi jawab nahi mil raha. Dobara try karein.';
 
     return res.status(200).json({ reply });
