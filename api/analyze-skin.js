@@ -1,8 +1,3 @@
-// api/analyze-skin.js
-// Vercel serverless function — REAL AI vision analysis using Groq's vision model.
-// Takes an uploaded image (base64), sends it to a vision-capable model, and gets
-// back genuine observations: body part detected, skin type, concerns, severity —
-// not pixel-math guesses.
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
