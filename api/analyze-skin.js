@@ -63,8 +63,7 @@ Rules:
             }
           ],
           temperature: 0.4,
-          max_completion_tokens: 1024,
-          response_format: { type: 'json_object' }
+          max_completion_tokens: 2048
         })
       }
     );
@@ -81,7 +80,17 @@ Rules:
     try {
       parsed = JSON.parse(raw);
     } catch (e) {
-      return res.status(500).json({ error: 'AI response parse nahi ho saka', raw });
+      // model sometimes wraps JSON in text/backticks — extract the {...} block and retry
+      const match = raw.match(/\{[\s\S]*\}/);
+      if (match) {
+        try {
+          parsed = JSON.parse(match[0]);
+        } catch (e2) {
+          return res.status(500).json({ error: 'AI response parse nahi ho saka', raw });
+        }
+      } else {
+        return res.status(500).json({ error: 'AI response parse nahi ho saka', raw });
+      }
     }
     return res.status(200).json({ analysis: parsed });
   } catch (error) {
